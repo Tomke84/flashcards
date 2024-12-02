@@ -1,0 +1,23 @@
+{% extends "flashcards_app/base.html" %}
+<!-- load humanize template filter set, activated in INSTALLED APPS in flashcards/settings.py -->
+<!-- This displays your data in a more human-readable way -->
+{% load humanize %}
+
+{% block content %}
+    <h2>
+        All Cards
+    </h2>
+    <a href="{% url 'card-create' %}" role="button">
+        ✨ Create New Card
+    </a>
+    {% for card in card_list %}
+        <!-- This is to only show the box headline once, then all the cards in the box -->
+        <!-- Only when you reach the next box and the headline changes, you show the new headline -->
+        {% ifchanged %}
+            <!-- use the ordinal filter of the humanize filter set to modify data in place before Django renders it -->
+            <!-- In this case it converts integers to their ordinal counterparts as strings -->
+            <h3>🗃 {{ card.box | ordinal }} Box</h3>
+        {% endifchanged %}
+        {% include "flashcards_app/card.html" %}
+    {% endfor %}
+{% endblock content %}

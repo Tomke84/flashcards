@@ -1,0 +1,15 @@
+{% extends "flashcards_app/base.html" %}
+{% load humanize %}
+
+{% block content %}
+    <h2>🗃 {{ box_number | ordinal }} Box</h2>
+    <!-- The object_list variable contains your cards as objects -->
+    <!-- You're using two filters on object_list -->
+    <!-- length filter gives you the number of cards in the box -->
+    <!-- pluralize filter assures the grammatical correctness of your message -->
+    <mark>{{ object_list | length }}</mark> Card{{ object_list | pluralize }} left in box.
+    <hr>
+    {% if check_card %}
+        {% include "flashcards_app/card.html" with card=check_card %}
+    {% endif %}
+{% endblock content %}

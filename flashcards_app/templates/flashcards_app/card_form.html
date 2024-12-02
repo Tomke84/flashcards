@@ -1,0 +1,23 @@
+{% extends "flashcards_app/base.html" %}
+
+{% block content %}
+    <!-- If this template receives card data, then you show the 'Edit Card' headline -->
+    <!-- Otherwise you display 'Create New Card' -->
+    {% if card %}
+        <h2>✏️ Edit Card</h2>
+    {% else %}
+        <h2>✨ Create New Card</h2>
+    {% endif %}
+    <form method="post">
+        <!-- Always use this security measure when posting content in Django forms -->
+        <!-- This is to prevent cross-site request forgery -->
+        {% csrf_token %}
+        <!-- This displays the form fields wrapped in paragraphs -->
+        {{ form.as_p }}
+        <input type="submit" value="Save Card">
+    </form>
+    <!-- Option to go back to card-list when you cancel the creation of a new card -->
+    <a href="{% url 'card-list' %}">
+        Cancel
+    </a>
+{% endblock %}

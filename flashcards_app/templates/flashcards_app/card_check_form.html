@@ -1,0 +1,18 @@
+<!-- Indicating you know the answer or not, is done by POSTing a form -->
+<!-- The backend of the form is handled in forms.py -->
+<!-- This is the template for the frontend of the form -->
+
+<form method="post">
+    <!-- Always use this security measure when posting content in Django forms -->
+    <!-- This is to prevent cross-site request forgery -->
+    {% csrf_token %}
+    <!-- The card_id field and the solved field are hidden because you don’t need to fill them out manually. The code logic you wrote will take care of that for you. -->
+    <!-- However, they must be present to be submitted to the back end and make the form valid. -->
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <input type="hidden" name="solved" value="{{ solved }}">
+    {% if solved %}
+        <input type="submit" value="✅ I know"/>
+    {% else %}
+        <input type="submit" value="❌ I don't know"/>
+    {% endif %}
+</form>

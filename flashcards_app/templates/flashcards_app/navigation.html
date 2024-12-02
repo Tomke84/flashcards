@@ -1,0 +1,7 @@
+<!-- This is to load the custom tag from templatetags/card_tags.py -->
+{% load cards_tags %}
+
+<nav>
+    <a href="{% url 'card-list' %}">🗂 All Cards</a>
+    {% boxes_as_links %}
+</nav>
